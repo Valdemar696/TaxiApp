@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SplashScreenActivity"
     android:fitsSystemWindows="true">
 
@@ -17,16 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:background="@color/green_700"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:layout_marginTop="200dp"
-            android:gravity="center_horizontal"
-            android:text="Taxi App"
-            android:textColor="@color/orange_200"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_marginTop="150dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="90dp"
+            app:srcCompat="@drawable/taxi_logo" />
 
     </LinearLayout>
 

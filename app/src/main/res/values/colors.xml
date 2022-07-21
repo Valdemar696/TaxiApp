@@ -2,7 +2,9 @@
 <resources>
     <color name="orange_200">#FFA000</color>
     <color name="orange_500">#F57C00</color>
-    <color name="orange_700">#E64A19</color>
+    <color name="colorPrimary">#FFA000</color>
+    <color name="orange_700">#B2330A</color>
+    <color name="colorPrimaryDark">#B2330A</color>
     <color name="green_200">#21D15B</color>
     <color name="green_700">#2CAE66</color>
     <color name="black">#FF000000</color>

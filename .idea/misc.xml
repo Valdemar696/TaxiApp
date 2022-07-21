@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/drawable/dark_rounded_button.xml" value="0.1755" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/drawable/darkroundedbutton.xml" value="0.122" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/drawable/rounded_button.xml" value="0.1755" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1755" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/drawable/rundstyle.xml" value="0.1755" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/layout/activity_choose_mode.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/layout/activity_driver_sign_in.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioFolders/TaxiApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.21532846715328466" />
       </map>
     </option>
   </component>
