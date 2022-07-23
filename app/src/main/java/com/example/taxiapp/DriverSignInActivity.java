@@ -59,6 +59,9 @@ public class DriverSignInActivity extends AppCompatActivity {
         if (emailInput.isEmpty()) {
             textInputEmail.setError("Please, input your email");
             return false;
+        } else if (!emailInput.contains("@")) {
+            textInputEmail.setError("Email must contain an '@' symbol");
+            return false;
         } else {
             textInputEmail.setError("");
             return true;
@@ -86,7 +89,7 @@ public class DriverSignInActivity extends AppCompatActivity {
         }
     }
 
-    public void loginSignUpUser(View view) {
+    public void loginSignUpDriver(View view) {
         if (!validateEmail() | !validateName() | !validatePassword()) {
             return;
         }
@@ -99,6 +102,7 @@ public class DriverSignInActivity extends AppCompatActivity {
         Toast.makeText(this, userInput, Toast.LENGTH_LONG).show();
     }
 
-    public void toggleLoginSignUp(View view) {
+    public void toggleLoginSignUpDriver(View view) {
     }
+
 }
