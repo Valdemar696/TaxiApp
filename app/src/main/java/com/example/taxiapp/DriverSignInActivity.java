@@ -1,14 +1,21 @@
 package com.example.taxiapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DriverSignInActivity extends AppCompatActivity {
 
@@ -19,6 +26,12 @@ public class DriverSignInActivity extends AppCompatActivity {
 
     private Button loginSignUpButton;
     private TextView toggleLoginSignUpTextView;
+
+    private boolean isLoginModeActive;
+
+    private static final String TAG = "DriverSignInActivity";
+
+    private FirebaseAuth auth; //аутентификация бд фаербейза, 42 строка градла
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +45,8 @@ public class DriverSignInActivity extends AppCompatActivity {
 
         loginSignUpButton = findViewById(R.id.loginSignUpButton);
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
+
+        auth = FirebaseAuth.getInstance(); //иницилизируем аутентификацию
 
     }
 
@@ -79,12 +94,11 @@ public class DriverSignInActivity extends AppCompatActivity {
         } else if (passwordInput.length() < 7) {
             textInputPassword.setError("Password length have to be more than 6");
             return false;
-        } else if (!passwordInput.equals(confirmPasswordInput)) {
+        } else if (!passwordInput.equals(confirmPasswordInput) && !isLoginModeActive) {
             textInputPassword.setError("Passwords have to match");
             return false;
-        }
-        else {
-            textInputName.setError("");
+        }else {
+            textInputPassword.setError("");
             return true;
         }
     }
@@ -94,15 +108,67 @@ public class DriverSignInActivity extends AppCompatActivity {
             return;
         }
 
-        String userInput =  "Name: " + textInputName.getEditText().getText().toString().trim() + "\n" +
-                            "Email: " + textInputEmail.getEditText().getText().toString().trim() + "\n" +
-                            "Password: " + textInputPassword.getEditText().getText().toString().trim() + "\n";
-
-
-        Toast.makeText(this, userInput, Toast.LENGTH_LONG).show();
+        if (isLoginModeActive) {
+            auth.signInWithEmailAndPassword( // метод скопирован из документации Firebase
+                                             // https://firebase.google.com/docs/auth/android/password-auth?authuser=0#java_2
+                            textInputEmail.getEditText().getText().toString().trim(),
+                            textInputPassword.getEditText().getText().toString().trim())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = auth.getCurrentUser();
+                                //updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(DriverSignInActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+                        }
+                    });
+        } else {
+            auth.createUserWithEmailAndPassword( // метод скопирован из документации Firebase
+                                                 // https://firebase.google.com/docs/auth/android/password-auth?authuser=0#java_2
+                            textInputEmail.getEditText().getText().toString().trim(),
+                            textInputPassword.getEditText().getText().toString().trim())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = auth.getCurrentUser();
+                                //updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(DriverSignInActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+                        }
+                    });
+        }
     }
 
     public void toggleLoginSignUpDriver(View view) {
+
+        if (isLoginModeActive) { // Sign Up
+            isLoginModeActive = false;
+            loginSignUpButton.setText("Sign Up");
+            toggleLoginSignUpTextView.setText("Or, log in");
+            textInputConfirmPassword.setVisibility(View.VISIBLE);
+        } else { // Log In
+            isLoginModeActive = true;
+            loginSignUpButton.setText("Log In");
+            toggleLoginSignUpTextView.setText("Or, sign up");
+            textInputConfirmPassword.setVisibility(View.GONE);
+        }
+
     }
 
 }

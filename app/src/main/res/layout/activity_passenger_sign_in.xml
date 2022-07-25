@@ -15,6 +15,20 @@
         android:layout_height="40dp"
         app:srcCompat="@drawable/taxi_logo" />
 
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowRadius="25"
+        android:text="Passenger Sign In"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputName"
         app:errorEnabled="true"
@@ -22,7 +36,7 @@
         app:counterMaxLength="15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:hint="Name"
@@ -80,19 +94,19 @@
 
     <Button
         android:id="@+id/loginSignUpButton"
-        android:onClick="loginSignUpUser"
+        android:onClick="loginSignUpDriver"
         android:background="@drawable/rounded_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:text="Sign up"
         android:textSize="16sp"
         android:textColor="?attr/colorPrimaryVariant" />
 
     <TextView
         android:id="@+id/toggleLoginSignUpTextView"
-        android:onClick="toggleLoginSignUpUser"
+        android:onClick="toggleLoginSignUpDriver"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
